@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.kakao.vectormap.label.LodLabel
 import com.mobile.reconnect.data.model.search.MissingPerson
 
 class HomeBottomViewModel : ViewModel() {
@@ -21,6 +22,9 @@ class HomeBottomViewModel : ViewModel() {
 
 	val personListLiveData = MutableLiveData<List<MissingPerson>>()
 
+	private var _lodLabel = MutableLiveData<LodLabel?>()
+	val lodLabel: LiveData<LodLabel?> get() = _lodLabel
+
 	fun updateRadius(radiusValue: Int) {
 		_radius.value = radiusValue
 	}
@@ -32,5 +36,13 @@ class HomeBottomViewModel : ViewModel() {
 
 	fun setId(id: Int) {
 		_id.value = id
+	}
+
+	fun setLodLabel(lodLabel: LodLabel) {
+		_lodLabel.value = lodLabel
+	}
+
+	fun resetLodLabel(lodLabel: LodLabel) {
+		_lodLabel.value = null
 	}
 }

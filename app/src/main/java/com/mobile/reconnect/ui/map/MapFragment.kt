@@ -292,6 +292,13 @@ class MapFragment : BaseFragment<FragmentMapBinding>(R.layout.fragment_map) {
 		lodLabel = layer!!.addLodLabel(options)
 	}
 
+	private fun removeLocationLabel() {
+		lodLabel?.let {
+			kakaoMap!!.labelManager!!.lodLayer!!.remove(it)
+			lodLabel = null
+		}
+	}
+
 	/***
 	 * stomp
 	 */
@@ -493,8 +500,8 @@ class MapFragment : BaseFragment<FragmentMapBinding>(R.layout.fragment_map) {
 
 	private fun showItemDetails(id: Int) {
 		println("클릭된 아이템 ID: $id")
-		lodLabel?.remove()
 		runStompTopicPredictedLocations(id)
+		removeLocationLabel()
 	}
 
 	/***

@@ -40,31 +40,31 @@ class SearchFilteringFeatureFragment : BottomSheetDialogFragment() {
 
 		binding.btnNonDisabled.setOnClickListener {
 			setChipClickListener(binding.btnNonDisabled, R.color.primary_red, R.color.gray_300)
-			feature += "NONE "
+			feature = "NONE"
 			request = SearchRequest(specialFeature = feature)
 		}
 
 		binding.btnDisabled.setOnClickListener {
 			setChipClickListener(binding.btnDisabled, R.color.primary_red, R.color.gray_300)
-			feature += "DISABILITY "
+			feature = "DISABILITY"
 			request = SearchRequest(specialFeature = feature)
 		}
 
 		binding.btnDementia.setOnClickListener {
 			setChipClickListener(binding.btnDementia, R.color.primary_red, R.color.gray_300)
-			feature += "DEMENTIA "
+			feature = "DEMENTIA"
 			request = SearchRequest(specialFeature = feature)
 		}
 
 		binding.btnRunaway.setOnClickListener {
 			setChipClickListener(binding.btnRunaway, R.color.primary_red, R.color.gray_300)
-			feature += "RUNAWAY "
+			feature = "RUNAWAY"
 			request = SearchRequest(specialFeature = feature)
 		}
 
 		binding.btnEtc.setOnClickListener {
 			setChipClickListener(binding.btnEtc, R.color.primary_red, R.color.gray_300)
-			feature += "OTHER "
+			feature = "OTHER"
 			request = SearchRequest(specialFeature = feature)
 		}
 

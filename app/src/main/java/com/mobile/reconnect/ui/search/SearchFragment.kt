@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
+import com.google.gson.GsonBuilder
 import com.mobile.reconnect.R
 import com.mobile.reconnect.data.model.search.SearchRequest
 import com.mobile.reconnect.databinding.FragmentSearchBinding
@@ -27,11 +28,11 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
 		super.onViewCreated(view, savedInstanceState)
 
 		setupRecyclerView()
-		request = SearchRequest()
 		viewModel.searchMissingPersons(request) // 실종자 목록 조회
 
 		// 검색 뷰 설정
-		binding.searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+		binding.searchView.setOnQueryTextListener(object :
+			androidx.appcompat.widget.SearchView.OnQueryTextListener {
 			override fun onQueryTextSubmit(query: String?): Boolean {
 				query?.let {
 					request = SearchRequest(name = it)
@@ -50,22 +51,46 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
 			val filterBottomSheet = SearchFilteringFragment()
 			filterBottomSheet.show(childFragmentManager, filterBottomSheet.tag)
 		}
+
 		binding.filteringChipGender.setOnClickListener {
-			val filterBottomSheet = SearchFilteringGenderFragment()
-			filterBottomSheet.show(childFragmentManager, filterBottomSheet.tag)
+			if (binding.filteringChipGender.chipStrokeColor != ContextCompat.getColorStateList(
+					requireContext(),
+					R.color.primary_red
+				)
+			) {
+				val filterBottomSheet = SearchFilteringGenderFragment()
+				filterBottomSheet.show(childFragmentManager, filterBottomSheet.tag)
+			}
 
 			setChipClickListener(binding.filteringChipGender, R.color.primary_red, R.color.gray_300)
 		}
+
 		binding.filteringChipFeature.setOnClickListener {
-			val filterBottomSheet = SearchFilteringFeatureFragment()
-			filterBottomSheet.show(childFragmentManager, filterBottomSheet.tag)
+			if (binding.filteringChipGender.chipStrokeColor != ContextCompat.getColorStateList(
+					requireContext(),
+					R.color.primary_red
+				)
+			) {
+				val filterBottomSheet = SearchFilteringFeatureFragment()
+				filterBottomSheet.show(childFragmentManager, filterBottomSheet.tag)
+			}
 
-			setChipClickListener(binding.filteringChipFeature, R.color.primary_red, R.color.gray_300)
+			setChipClickListener(
+				binding.filteringChipFeature,
+				R.color.primary_red,
+				R.color.gray_300
+			)
 		}
-		binding.filteringChipAge.setOnClickListener {
-			val filterBottomSheet = SearchFilteringAgeFragment()
-			filterBottomSheet.show(childFragmentManager, filterBottomSheet.tag)
 
+		binding.filteringChipAge.setOnClickListener {
+			if (binding.filteringChipGender.chipStrokeColor != ContextCompat.getColorStateList(
+					requireContext(),
+					R.color.primary_red
+				)
+			) {
+				val filterBottomSheet = SearchFilteringAgeFragment()
+				filterBottomSheet.show(childFragmentManager, filterBottomSheet.tag)
+			}
 			setChipClickListener(binding.filteringChipAge, R.color.primary_red, R.color.gray_300)
 		}
 
@@ -91,18 +116,18 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
 
 	// Chip 클릭 시 색상 변경 함수
 	private fun setChipClickListener(chip: Chip, selectedColor: Int, unselectedColor: Int) {
-//		chip.setOnClickListener {
-			val currentStrokeColor = chip.chipStrokeColor?.defaultColor
+		val currentStrokeColor = chip.chipStrokeColor?.defaultColor
 
-			if (currentStrokeColor == ContextCompat.getColor(requireContext(), selectedColor)) {
-				chip.setChipStrokeColorResource(unselectedColor)
-				chip.setTextColor(ContextCompat.getColor(requireContext(),  R.color.gray_600))
-			} else {
-				chip.setChipStrokeColorResource(selectedColor)
-				chip.setTextColor(ContextCompat.getColor(requireContext(), selectedColor))
-			}
+		if (currentStrokeColor == ContextCompat.getColor(requireContext(), selectedColor)) {
+			chip.setChipStrokeColorResource(unselectedColor)
+			chip.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray_600))
 
-			chip.isChecked = !chip.isChecked
-//		}
+			viewModel.searchMissingPersons(request) // 실종자 목록 조회
+		} else {
+			chip.setChipStrokeColorResource(selectedColor)
+			chip.setTextColor(ContextCompat.getColor(requireContext(), selectedColor))
+		}
+
+		chip.isChecked = !chip.isChecked
 	}
 }

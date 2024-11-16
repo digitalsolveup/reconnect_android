@@ -56,15 +56,16 @@ class SearchFilteringAgeFragment : BottomSheetDialogFragment() {
 
 	private fun selectGender(selectedChip: Chip, unselectedChip: Chip) {
 		val selectedColor = ContextCompat.getColor(requireContext(), R.color.primary_red)
-		val unselectedColor = ContextCompat.getColor(requireContext(), R.color.gray_300)
 
 		val currentStrokeColor = selectedChip.chipStrokeColor?.defaultColor
 
 		if (currentStrokeColor == selectedColor) {
 			selectedChip.setChipStrokeColorResource(R.color.gray_300)
+			selectedChip.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray_600))
 			selectedChip.isChecked = false
 		} else {
 			selectedChip.setChipStrokeColorResource(R.color.primary_red)
+			selectedChip.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary_red))
 			selectedChip.isChecked = true
 			viewModel.setFilters(true)
 		}

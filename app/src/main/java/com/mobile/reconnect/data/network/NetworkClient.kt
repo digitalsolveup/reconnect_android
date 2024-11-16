@@ -1,6 +1,7 @@
 package com.mobile.reconnect.data.network
 
 import android.content.Context
+import com.google.gson.GsonBuilder
 import java.net.CookieManager
 import okhttp3.JavaNetCookieJar
 import okhttp3.OkHttpClient
@@ -32,10 +33,13 @@ object NetworkClient {
 	@Provides
 	@Singleton
 	fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+//		val gson = GsonBuilder()
+//			.create()
+
 		return Retrofit.Builder()
 			.baseUrl(BuildConfig.BASE_URL)
 			.client(okHttpClient)
-			.addConverterFactory(GsonConverterFactory.create())  // Gson을 이용해 JSON 변환
+			.addConverterFactory(GsonConverterFactory.create())
 			.build()
 	}
 
