@@ -49,7 +49,7 @@ class SearchFilteringFragment : BottomSheetDialogFragment() {
 		}
 
 		binding.etAge.doAfterTextChanged {
-			age = binding.etAge.text.toString()
+			age = it.toString()
 		}
 
 		binding.btnNonDisabled.setOnClickListener {
@@ -89,6 +89,7 @@ class SearchFilteringFragment : BottomSheetDialogFragment() {
 					specialFeature = feature
 				)
 			)
+			dismiss()
 		}
 	}
 

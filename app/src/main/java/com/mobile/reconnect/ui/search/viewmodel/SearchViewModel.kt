@@ -113,7 +113,7 @@ class SearchViewModel @Inject constructor(
 						var filteredList = responseBody.content.filter { missingPerson ->
 							missingPerson.name.equals(query.name, ignoreCase = true) &&
 									missingPerson.gender == query.gender &&
-									missingPerson.age.toString() == query.age.toString() &&
+									missingPerson.age == query.age &&
 									missingPerson.specialFeature == query.specialFeature
 						}
 

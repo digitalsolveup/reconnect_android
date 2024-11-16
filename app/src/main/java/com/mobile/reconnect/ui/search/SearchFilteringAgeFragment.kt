@@ -40,7 +40,7 @@ class SearchFilteringAgeFragment : BottomSheetDialogFragment() {
 		var age = ""
 
 		binding.etAge.doAfterTextChanged {
-			request = SearchRequest(age = age.toInt())
+			request = SearchRequest(age = it.toString().toInt())
 		}
 
 		binding.btnSelect.setOnClickListener {
