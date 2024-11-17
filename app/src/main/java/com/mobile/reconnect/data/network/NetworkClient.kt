@@ -6,6 +6,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import com.mobile.reconnect.BuildConfig
+import com.mobile.reconnect.data.network.api.ReportApi
 import com.mobile.reconnect.data.network.api.report.MissingPersonApi
 import com.mobile.reconnect.data.network.api.search.SearchApi
 import dagger.Module
@@ -54,6 +55,12 @@ object NetworkClient {
 	@Singleton
 	fun provideMissingPersonApi(retrofit: Retrofit): MissingPersonApi {
 		return retrofit.create(MissingPersonApi::class.java)
+	}
+
+	@Provides
+	@Singleton
+	fun provideReportApi(retrofit: Retrofit): ReportApi {
+		return retrofit.create(ReportApi::class.java)
 	}
 
 

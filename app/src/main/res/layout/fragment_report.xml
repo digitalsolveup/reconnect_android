@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
-            name="missingPerson"
-            type="com.mobile.reconnect.data.model.report.MissingPersonListResponse" />
+            name="viewModel"
+            type="com.mobile.reconnect.ui.report.viewmodel.MissingPersonViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.login.ReportFragment">
+        tools:context=".ui.report.ReportFragment">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/SemiBoldFontKr.16"
-                android:text="@{viewModel.currentTime}시 실종자"
+                android:text="@{viewModel.currentTime + `시 실종자`}"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 tools:layout_editor_absoluteX="22dp"
@@ -55,7 +55,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:checkableBehavior="single">>
+                android:checkableBehavior="single"
+                app:selectionRequired="true">
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/radius_2km"
@@ -63,30 +64,41 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="거리순"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"
+                    app:chipStrokeColor="@color/gray"
+                    app:chipStrokeWidth="1dp"
+                    app:chipIconVisible="false"
+                    app:checkedIconVisible="false"
+                    android:checkable="true" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/radius_3km"
                     style="@style/RegularFontKr.16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/map_chip_item_color"
                     android:text="등록순"
                     android:textSize="13sp"
                     app:chipStrokeColor="@color/gray"
-                    app:chipStrokeWidth="1dp" />
+                    app:chipStrokeWidth="1dp"
+                    app:chipIconVisible="false"
+                    app:checkedIconVisible="false"
+                    android:checkable="true" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/radius_4km"
                     style="@style/RegularFontKr.16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/map_chip_item_color"
                     android:text="제보적은순"
                     android:textSize="13sp"
                     app:chipStrokeColor="@color/gray"
-                    app:chipStrokeWidth="1dp" />
+                    app:chipStrokeWidth="1dp"
+                    app:chipIconVisible="false"
+                    app:checkedIconVisible="false"
+                    android:checkable="true" />
+
             </com.google.android.material.chip.ChipGroup>
+
         </HorizontalScrollView>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -97,7 +109,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

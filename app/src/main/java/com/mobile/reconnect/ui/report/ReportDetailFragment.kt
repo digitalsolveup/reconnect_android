@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.mobile.reconnect.R
 import com.mobile.reconnect.data.model.report.MissingPersonListResponse
 import com.mobile.reconnect.databinding.FragmentReportDetailBinding
@@ -32,6 +33,19 @@ class ReportDetailFragment : BaseFragment<FragmentReportDetailBinding>(R.layout.
 
         // LiveData 관찰 설정
         setupObservers()
+
+        // 뒤로 가기 버튼 설정
+        binding.backButton.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
+        // reportbtn 클릭 시 ReportRegistrationFragment로 이동
+        binding.reportbtn.setOnClickListener {
+            val bundle = Bundle().apply {
+                putParcelable("missingPerson", missingPerson)
+            }
+            findNavController().navigate(R.id.action_reportDetailFragment_to_reportRegistrationFragment, bundle)
+        }
     }
 
     private fun setupObservers() {

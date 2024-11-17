@@ -6,7 +6,7 @@
     <data>
         <variable
             name="missingPerson"
-            type="com.mobile.reconnect.data.model.MissingPerson" />
+            type="com.mobile.reconnect.data.model.report.MissingPersonListResponse" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -65,7 +65,7 @@
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:paddingRight="5dp"
-                        app:imageResource="@{missingPerson.imageResId}"
+                        app:imageUrl="@{missingPerson.imageURL}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -94,7 +94,7 @@
                         android:layout_marginBottom="64dp"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:text='@{" (" + missingPerson.gender.label + ", " + missingPerson.age + "세, " + missingPerson.height + "cm, " + missingPerson.weight + "kg, " + missingPerson.specialFeature.label + ")"}'
+                        android:text='@{" (" + missingPerson.genderLabel + ", " + missingPerson.age + "세, " + missingPerson.height + "cm, " + missingPerson.weight + "kg, " + missingPerson.specialFeatureLabel + ")"}'
                         android:textColor="@color/gray_700"
                         android:textSize="13sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -116,7 +116,6 @@
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toEndOf="@id/imageViewPerson"
                         app:layout_constraintTop_toBottomOf="@+id/tvPersonInfo" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <!-- 두 번째 ConstraintLayout -->
