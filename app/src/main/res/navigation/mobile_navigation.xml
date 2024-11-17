@@ -36,7 +36,7 @@
             app:destination="@id/fragment_report_registration" />
     </fragment>
 
-    <!-- 제보 등록 -->
+    <!-- 제보 등록  -->
     <fragment
         android:id="@+id/fragment_report_registration"
         android:name="com.mobile.reconnect.ui.report.ReportRegistrationFragment"

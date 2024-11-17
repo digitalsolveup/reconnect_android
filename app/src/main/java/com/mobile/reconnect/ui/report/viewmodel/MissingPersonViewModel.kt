@@ -54,7 +54,6 @@ class MissingPersonViewModel @Inject constructor(
 			}
 		}
 	}
-
 	private fun updateCurrentTime() {
 		viewModelScope.launch {
 			while (true) {

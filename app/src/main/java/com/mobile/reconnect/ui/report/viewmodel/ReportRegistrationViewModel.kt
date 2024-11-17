@@ -29,7 +29,6 @@ class ReportRegistrationViewModel @Inject constructor(
 			}
 		}
 	}
-
 	fun updateGender(
 		missingPersonId: Long,
 		gender: com.mobile.reconnect.data.model.ReportGender, // 올바른 타입
