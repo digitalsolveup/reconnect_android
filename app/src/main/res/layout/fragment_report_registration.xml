@@ -6,7 +6,7 @@
     <data>
         <variable
             name="missingPerson"
-            type="com.mobile.reconnect.data.model.report.MissingPersonDetailResponse" />
+            type="com.mobile.reconnect.data.model.report.MissingPersonListResponse" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -153,27 +153,24 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 
-                    <RadioGroup
-                        android:id="@+id/genderRadioGroup"
+                    <RadioButton
+                        android:id="@+id/radioButton"
+                        style="@style/SemiBoldFontKr.16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:text="남자"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/textView8">
+                        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
-                        <RadioButton
-                            android:id="@+id/radioButtonMale"
-                            style="@style/SemiBoldFontKr.16"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="남자" />
-
-                        <RadioButton
-                            android:id="@+id/radioButtonFemale"
-                            style="@style/SemiBoldFontKr.16"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="여자" />
-                    </RadioGroup>
+                    <RadioButton
+                        android:id="@+id/radioButton2"
+                        style="@style/SemiBoldFontKr.16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="여자"
+                        app:layout_constraintStart_toStartOf="@+id/radioButton"
+                        app:layout_constraintTop_toBottomOf="@+id/radioButton" />
 
                     <CheckBox
                         android:id="@+id/checkBox3"
@@ -405,13 +402,15 @@
                         style="@style/SemiBoldFontKr.16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="48dp"
+                        android:layout_marginBottom="14dp"
                         android:text="2. 나이"
                         android:textColor="@color/gray_800"
                         android:textSize="18sp"
                         android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@+id/textView38"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/genderRadioGroup" />
+                        app:layout_constraintTop_toBottomOf="@+id/radioButton2" />
 
                     <TextView
                         android:id="@+id/textView42"
