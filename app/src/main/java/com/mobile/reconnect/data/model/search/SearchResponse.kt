@@ -27,7 +27,8 @@ data class MissingPerson(
 	val bottoms: String,
 	val shoes: String,
 	val accessories: String,
-	val hair: String
+	val hair: String,
+//	val location: String
 )
 
 data class Pageable(

@@ -115,6 +115,7 @@ class SearchViewModel @Inject constructor(
 									(query.gender == null || missingPerson.gender == query.gender) &&
 									(query?.age == null || isAgeInRange(missingPerson.age, query.age)) &&
 									(query.specialFeature == null || missingPerson.specialFeature == query.specialFeature)
+//									(query.lastSeenLocation == null || missingPerson.location == query.lastSeenLocation)
 						}
 
 

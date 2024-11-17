@@ -27,10 +27,10 @@ class MyReportFragment: BaseFragment<FragmentMyReportBinding>(R.layout.fragment_
 	}
 	private fun setupRecyclerView() {
 		reports = listOf(
-			MyReportList("홍길동", Status.SEARCHING, "2024-11-10"),
-			MyReportList("박길동", Status.FIND, "2024-11-10"),
-			MyReportList("이길동", Status.FIND, "2024-11-10"),
-			MyReportList("김길동", Status.SEARCHING, "2024-11-10"),
+			MyReportList(R.drawable.ic_baseline_my_24, "홍길동", Status.SEARCHING, "2024-11-10"),
+			MyReportList(R.drawable.ic_baseline_my_24, "박길동", Status.FIND, "2024-11-10"),
+			MyReportList(R.drawable.ic_baseline_my_24, "이길동", Status.FIND, "2024-11-10"),
+			MyReportList(R.drawable.ic_baseline_my_24, "김길동", Status.SEARCHING, "2024-11-10"),
 		)
 
 		adapter = MyReportAdapter(reports) { person ->

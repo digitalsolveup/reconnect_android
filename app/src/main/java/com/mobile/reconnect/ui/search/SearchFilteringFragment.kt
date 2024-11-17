@@ -37,6 +37,7 @@ class SearchFilteringFragment : BottomSheetDialogFragment() {
 		var age = ""
 		var gender = ""
 		var feature = ""
+		var location = ""
 
 		binding.btnMale.setOnClickListener {
 			selectGender(binding.btnMale, binding.btnFemale)
@@ -85,12 +86,14 @@ class SearchFilteringFragment : BottomSheetDialogFragment() {
 			val genderValue = gender.ifEmpty { null }
 			val ageValue = if (age.isNotEmpty()) age.toInt() else null
 			val featureValue = feature.ifEmpty { null }
+			val locationValue = location.ifEmpty { null }
 
 			viewModel.searchMissingPersonsFiltering(
 				SearchRequest(
 					gender = genderValue,
 					age = ageValue,
-					specialFeature = featureValue
+					specialFeature = featureValue,
+					lastSeenLocation = locationValue
 				)
 			)
 			dismiss()
