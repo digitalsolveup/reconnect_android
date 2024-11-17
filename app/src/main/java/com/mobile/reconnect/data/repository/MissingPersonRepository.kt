@@ -14,7 +14,6 @@ class MissingPersonRepository @Inject constructor(
 	suspend fun getMissingPersons(sortBy: String, latitude: Double, longitude: Double): List<MissingPersonListResponse> {
 		return missingPersonApi.getMissingPersons(sortBy, latitude, longitude)
 	}
-
 	suspend fun getMissingPersonDetails(id: Long): MissingPersonDetailResponse {
 		return missingPersonApi.getMissingPersonDetails(id)
 	}

@@ -36,6 +36,6 @@ data class MissingPersonListResponse(
             "DEMENTIA" -> "치매"
             "RUNAWAY" -> "가출인"
             "OTHER" -> "기타"
-            else -> "알 수 없음"
+            else -> "알 수 없음" //
         }
 }

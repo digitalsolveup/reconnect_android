@@ -6,6 +6,7 @@ import com.mobile.reconnect.data.network.ApiService
 import retrofit2.Response
 import javax.inject.Inject
 
+// api
 class ReportApi @Inject constructor(private val apiService: ApiService) {
 
 	suspend fun createReport(reportRequest: ReportRequest): Response<Unit> {
