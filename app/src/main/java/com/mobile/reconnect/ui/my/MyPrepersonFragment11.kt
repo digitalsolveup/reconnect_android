@@ -21,16 +21,12 @@ class MyPrepersonFragment11 : BaseFragment<FragmentMyPreperson11Binding>(R.layou
 
 
         binding.addbtn.setOnClickListener {
-	        parentFragmentManager.beginTransaction()
-		        .remove(this) // 현재 Fragment를 제거
-		        .commit()
-
             findNavController().navigate(R.id.action_prepersonFragment11_to_navigation_my_preperson)
         }
 
         // 뒤로 가기 버튼 설정
-//        binding.backButton.setOnClickListener {
-//            findNavController().navigateUp()
-//        }
+        binding.backButton.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 }
