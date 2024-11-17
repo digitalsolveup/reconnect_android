@@ -1,5 +1,6 @@
 package com.mobile.reconnect.ui.login
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -21,47 +22,21 @@ import com.mobile.reconnect.ui.common.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login), View.OnClickListener {
+class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
 
-	// 로그인 콜백
-	private val mCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
-		if (error != null) {
-			Log.e(Constants.TAG, "로그인 실패 $error")
-			Toast.makeText(this, "로그인 실패. 다시 시도해 주세요.", Toast.LENGTH_SHORT).show()
-		} else if (token != null) {
-			Log.d(Constants.TAG, "로그인 성공 ${token.accessToken}")
-			Toast.makeText(this, "로그인 성공!", Toast.LENGTH_SHORT).show()
-			nextActivity()
-		}
-	}
-
-	// 로그인 버튼 클릭 리스너
-	override fun onClick(v: View?) {
-		when (v?.id) {
-			binding.btnKakaoLogin.id -> {
-				// 카카오톡 로그인 가능 여부 확인
-				if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)) {
-					UserApiClient.instance.loginWithKakaoTalk(this) { token, error ->
-						if (error != null) {
-							Log.e(Constants.TAG, "카카오톡 로그인 실패 $error")
-							// 카카오톡 로그인 실패 시 계정으로 전환
-							if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
-								return@loginWithKakaoTalk
-							} else {
-								UserApiClient.instance.loginWithKakaoAccount(
-									this,
-									callback = mCallback
-								)
-							}
-						} else {
-							Log.d(Constants.TAG, "카카오톡 로그인 성공 ${token?.accessToken}")
-							Toast.makeText(this, "카카오톡 로그인 성공!", Toast.LENGTH_SHORT).show()
-							nextActivity()
-						}
-					}
-				} else {
-					UserApiClient.instance.loginWithKakaoAccount(this, callback = mCallback)
+	private fun kakaoLogin(context: Context){
+		// 카카오톡으로 로그인
+		UserApiClient.instance.loginWithKakaoAccount(context) { token, error ->
+			if (error != null) {
+				Log.e("너무 잠이 온다", "zzzzz로그인 실패", error)
+			}
+			else if (token != null) {
+				Log.i("너무 잠이 온다", "로그인 성공 ${token.accessToken}")
+				UserApiClient.instance.me { user, error ->
+					Log.i("kj308", user.toString())
 				}
+				Toast.makeText(context, "로그인 성공!", Toast.LENGTH_SHORT).show()
+				nextActivity()
 			}
 		}
 	}
@@ -71,23 +46,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
 		super.onCreate(savedInstanceState)
 
 		// 카카오 SDK 초기화
-		Log.d(Constants.TAG, "keyhash : ${Utility.getKeyHash(this)}")
+//		Log.d(Constants.TAG, "keyhash : ${Utility.getKeyHash(this)}")
 		KakaoSdk.init(this, BuildConfig.KAKAO_LOGIN_KEY)
 
-		// 이미 로그인된 상태인지 확인
-		if (AuthApiClient.instance.hasToken()) {
-			// 로그인된 상태라면 액세스 토큰 유효성 검사
-			UserApiClient.instance.accessTokenInfo { _, error ->
-				if (error == null) {
-					nextActivity() // 토큰 유효하면 바로 JoinActivity로 이동
-				} else {
-					Log.e(Constants.TAG, "토큰 정보 확인 실패 $error")
-				}
-			}
-		}
-
 		// 로그인 버튼 클릭 리스너 설정
-		binding.btnKakaoLogin.setOnClickListener(this)
+		binding.btnKakaoLogin.setOnClickListener{
+			kakaoLogin(this)
+		}
 
 		binding.btnNaverLogin.setOnClickListener {
 			startActivity(Intent(this, MainActivity::class.java))
