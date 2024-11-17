@@ -62,7 +62,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
 //						viewModel.signUp(signUpRequest, context)
 //					}
 				}
-				Toast.makeText(context, "로그인 성공!", Toast.LENGTH_SHORT).show()
 				nextActivity()
 			}
 		}
