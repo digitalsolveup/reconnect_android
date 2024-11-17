@@ -12,11 +12,5 @@ class ReportViewModel : ViewModel() {
     val reports: LiveData<List<MyReportList>> get() = _reports
 
     fun fetchReports() {
-        val exampleReports = listOf(
-	        MyReportList("홍길동", Status.SEARCHING, "2024. 09. 10"),
-	        MyReportList("이몽룡", Status.FIND, "2024. 09. 11"),
-	        MyReportList("성춘향", Status.SEARCHING, "2024. 09. 12")
-        )
-        _reports.value = exampleReports
     }
 }

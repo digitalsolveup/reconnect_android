@@ -12,6 +12,7 @@ import com.mobile.reconnect.R
 import com.mobile.reconnect.data.model.MissingPerson
 import com.mobile.reconnect.databinding.FragmentReportRegistrationBinding
 import android.widget.RadioButton
+import com.software.somding.presentation.common.NavigationUtil.navigate
 
 class ReportRegistrationFragment : Fragment() {
 
@@ -57,7 +58,7 @@ class ReportRegistrationFragment : Fragment() {
 
         // reportbtn 클릭 시 MyReportFragment로 이동
         binding.reportbtn.setOnClickListener {
-            findNavController().navigate(R.id.action_reportRegistrationFragment_to_myReportFragment)
+            navigate(R.id.action_reportRegistrationFragment_to_myReportFragment)
         }
     }
 

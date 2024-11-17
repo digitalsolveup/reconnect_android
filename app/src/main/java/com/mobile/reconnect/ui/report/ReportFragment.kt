@@ -11,6 +11,9 @@ import com.mobile.reconnect.ui.common.BaseFragment
 import com.mobile.reconnect.ui.report.adapter.MissingPersonAdapter
 import com.mobile.reconnect.ui.report.viewmodel.MissingPersonViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 @AndroidEntryPoint
 class ReportFragment : BaseFragment<FragmentReportBinding>(R.layout.fragment_report) {
@@ -20,8 +23,10 @@ class ReportFragment : BaseFragment<FragmentReportBinding>(R.layout.fragment_rep
 		super.onViewCreated(view, savedInstanceState)
 
 		binding.lifecycleOwner = viewLifecycleOwner // LiveData 바인딩 활성화
-
-		binding.radiusGroup.setOnCheckedChangeListener { _, checkedId ->
+		val now = Calendar.getInstance().time
+		val dateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+		binding.nowTime.text = dateFormat.format(now)+"시 실종자"
+			binding.radiusGroup.setOnCheckedChangeListener { _, checkedId ->
 			when (checkedId) {
 				R.id.radius_2km -> viewModel.fetchMissingPersons("DISTANCE", 37.5665, 126.9780)
 				R.id.radius_3km -> viewModel.fetchMissingPersons("REGISTRATION", 37.5665, 126.9780)

@@ -31,9 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/SemiBoldFontKr.16"
-                android:text="@{viewModel.currentTime}시 실종자"
-                android:textSize="16sp"
-                android:textStyle="bold"
+                android:textColor="@color/gray_800"
                 tools:layout_editor_absoluteX="22dp"
                 tools:layout_editor_absoluteY="12dp" />
         </androidx.appcompat.widget.Toolbar>

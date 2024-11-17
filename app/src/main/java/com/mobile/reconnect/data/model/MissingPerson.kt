@@ -38,7 +38,7 @@ enum class FaceType(val label: String) { // 얼굴형
 data class MissingPerson(
 	val id: Int,
 	val name: String,
-//	val imageURL: String,
+	val imageURL: String,
 	val imageResId: Int,
 	val specialFeature: SpecialFeature,
 	val nationality: Nationality,
