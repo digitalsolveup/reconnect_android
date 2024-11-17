@@ -57,6 +57,7 @@ object NetworkClient {
 		return retrofit.create(MissingPersonApi::class.java)
 	}
 
+
 	@Provides
 	@Singleton
 	fun provideReportApi(retrofit: Retrofit): ReportApi {

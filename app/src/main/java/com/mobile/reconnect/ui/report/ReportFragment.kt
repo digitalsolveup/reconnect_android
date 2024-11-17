@@ -52,6 +52,7 @@ class ReportFragment : BaseFragment<FragmentReportBinding>(R.layout.fragment_rep
 			}
 		}
 	}
+
 	private fun setupRecyclerView() {
 		val adapter = MissingPersonAdapter { missingPerson, view ->
 			val bundle = Bundle().apply {

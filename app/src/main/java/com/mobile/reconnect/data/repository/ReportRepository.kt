@@ -15,6 +15,7 @@ class ReportRepository @Inject constructor(private val api: ReportApi) {
 			null // 네트워크 에러 처리
 		}
 	}
+
 	suspend fun updateGender(missingPersonId: Long, gender: com.mobile.reconnect.data.model.ReportGender): Response<Unit>? {
 		return try {
 			api.updateGender(missingPersonId, gender)

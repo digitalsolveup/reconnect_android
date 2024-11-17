@@ -37,7 +37,6 @@ data class MissingPersonDetailResponse(
             "OTHER" -> "기타"
             else -> "알 수 없음"
         }
-
     val nationalityLabel: String
         get() = when (nationality) {
             "DOMESTIC" -> "내국인"

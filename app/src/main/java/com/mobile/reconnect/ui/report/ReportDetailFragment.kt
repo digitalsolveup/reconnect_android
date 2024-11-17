@@ -47,6 +47,7 @@ class ReportDetailFragment : BaseFragment<FragmentReportDetailBinding>(R.layout.
             findNavController().navigate(R.id.action_reportDetailFragment_to_reportRegistrationFragment, bundle)
         }
     }
+
     private fun setupObservers() {
         // 실종자 상세 정보 관찰
         viewModel.missingPersonDetail.observe(viewLifecycleOwner) { detail ->

@@ -18,7 +18,6 @@ data class ReportRequest(
     val surroundingImageUrls: List<String>? = emptyList(),
     val additionalReport: String? = null
 )
-
 enum class ReportGender(val label: String) { // 성별
     MALE("남자"),
     FEMALE("여자")

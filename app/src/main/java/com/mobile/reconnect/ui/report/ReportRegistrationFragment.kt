@@ -23,6 +23,7 @@ class ReportRegistrationFragment : Fragment(R.layout.fragment_report_registratio
             findNavController().navigate(R.id.action_reportRegistrationFragment_to_myReportFragment)
         }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

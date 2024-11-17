@@ -12,6 +12,7 @@ interface ApiService {
     @POST("/reports")
     suspend fun createReport(@Body reportRequest: ReportRequest): Response<Unit>
 
+
     @PATCH("/missing-persons/{id}/gender")
     suspend fun updateGender(
         @Path("id") missingPersonId: Long,
