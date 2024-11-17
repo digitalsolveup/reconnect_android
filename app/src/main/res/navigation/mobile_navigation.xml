@@ -30,7 +30,7 @@
     <fragment
         android:id="@+id/fragment_report_detail"
         android:name="com.mobile.reconnect.ui.report.ReportDetailFragment"
-        tools:layout="@layout/fragment_report_datail" >
+        tools:layout="@layout/fragment_report_detail">
         <action
             android:id="@+id/action_reportDetailFragment_to_reportRegistrationFragment"
             app:destination="@id/fragment_report_registration" />

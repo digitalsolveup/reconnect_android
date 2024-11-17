@@ -6,50 +6,44 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.mobile.reconnect.data.model.MissingPerson
-import com.mobile.reconnect.databinding.ItemMissingPersonBinding
+import com.mobile.reconnect.data.model.report.MissingPersonListResponse
 import com.mobile.reconnect.databinding.ItemReportMissingPersonBinding
 
-// RecyclerView에서 실종자 목록 표시를 위한 어댑터 (실종자 데이터 받아 각 항목 구성)
-class MissingPersonAdapter(private val onClick: (MissingPerson, View) -> Unit) : ListAdapter<MissingPerson, MissingPersonAdapter.MissingPersonViewHolder>(DiffCallback) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MissingPersonViewHolder {
-        val binding = ItemReportMissingPersonBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MissingPersonViewHolder(binding)
-    }
+class MissingPersonAdapter(
+	private val onClick: (MissingPersonListResponse, View) -> Unit
+) : ListAdapter<MissingPersonListResponse, MissingPersonAdapter.ViewHolder>(DiffCallback) {
 
-    override fun onBindViewHolder(holder: MissingPersonViewHolder, position: Int) {
-        val missingPerson = getItem(position)
-        holder.bind(missingPerson, onClick)
-    }
+	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+		val binding = ItemReportMissingPersonBinding.inflate(
+			LayoutInflater.from(parent.context),
+			parent,
+			false
+		)
+		return ViewHolder(binding)
+	}
 
-    class MissingPersonViewHolder(private val binding: ItemReportMissingPersonBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+	override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+		val item = getItem(position)
+		holder.bind(item, onClick)
+	}
 
-        fun bind(missingPerson: MissingPerson, onClick: (MissingPerson, View) -> Unit) {
-            binding.missingPerson = missingPerson // 데이터 바인딩
+	class ViewHolder(private val binding: ItemReportMissingPersonBinding) :
+		RecyclerView.ViewHolder(binding.root) {
+		fun bind(item: MissingPersonListResponse, onClick: (MissingPersonListResponse, View) -> Unit) {
+			binding.missingPerson = item
+			binding.root.setOnClickListener { onClick(item, it) }
+		}
+	}
 
-            // 아이템 전체 클릭 시 ReportDetailFragment로 이동
-            binding.root.setOnClickListener {
-                onClick(missingPerson, it)
-            }
+	companion object DiffCallback : DiffUtil.ItemCallback<MissingPersonListResponse>() {
+		override fun areItemsTheSame(
+			oldItem: MissingPersonListResponse,
+			newItem: MissingPersonListResponse
+		): Boolean = oldItem.id == newItem.id
 
-            // 버튼 클릭 시 ReportRegistrationFragment로 이동
-            binding.btnReport.setOnClickListener {
-                onClick(missingPerson, it)
-            }
-
-            // 즉시 데이터 바인딩을 반영
-            binding.executePendingBindings()
-        }
-    }
-
-    companion object DiffCallback : DiffUtil.ItemCallback<MissingPerson>() {
-        override fun areItemsTheSame(oldItem: MissingPerson, newItem: MissingPerson): Boolean {
-            return oldItem.id == newItem.id
-        }
-
-        override fun areContentsTheSame(oldItem: MissingPerson, newItem: MissingPerson): Boolean {
-            return oldItem == newItem
-        }
-    }
+		override fun areContentsTheSame(
+			oldItem: MissingPersonListResponse,
+			newItem: MissingPersonListResponse
+		): Boolean = oldItem == newItem
+	}
 }

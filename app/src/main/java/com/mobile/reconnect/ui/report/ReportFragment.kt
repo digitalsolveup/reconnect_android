@@ -7,69 +7,57 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobile.reconnect.R
 import com.mobile.reconnect.databinding.FragmentReportBinding
-import com.mobile.reconnect.ui.report.adapter.MissingPersonAdapter
-import com.mobile.reconnect.ui.report.viewmodel.ReportViewModel
 import com.mobile.reconnect.ui.common.BaseFragment
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import com.mobile.reconnect.ui.report.adapter.MissingPersonAdapter
+import com.mobile.reconnect.ui.report.viewmodel.MissingPersonViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-class ReportFragment: BaseFragment<FragmentReportBinding>(R.layout.fragment_report) {
-	private val viewModel: ReportViewModel by viewModels()
-
-	private lateinit var missingPersonAdapter: MissingPersonAdapter
+@AndroidEntryPoint
+class ReportFragment : BaseFragment<FragmentReportBinding>(R.layout.fragment_report) {
+	private val viewModel: MissingPersonViewModel by viewModels()
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
-		setCurrentTime()
+		binding.lifecycleOwner = viewLifecycleOwner // LiveData 바인딩 활성화
 
-		// RecyclerView 설정
-		setupRecyclerView()
-
-		// ViewModel에서 실종자 목록을 관찰하고 UI에 반영
-		viewModel.missingPersonList.observe(viewLifecycleOwner) { missingPersons ->
-			missingPersonAdapter.submitList(missingPersons)
+		binding.radiusGroup.setOnCheckedChangeListener { _, checkedId ->
+			when (checkedId) {
+				R.id.radius_2km -> viewModel.fetchMissingPersons("DISTANCE", 37.5665, 126.9780)
+				R.id.radius_3km -> viewModel.fetchMissingPersons("REGISTRATION", 37.5665, 126.9780)
+				R.id.radius_4km -> viewModel.fetchMissingPersons("REPORT_COUNT", 37.5665, 126.9780)
+			}
 		}
 
-		// 실종자 목록을 가져오는 로직 실행
-		viewModel.loadMissingPersons()
-//
-//		viewModel.text.observe(viewLifecycleOwner) {
-////			binding.textReport.text = it
-//		}
-	}
+		setupRecyclerView()
 
-	private fun setCurrentTime() {
-		// 현재 시간 포맷
-		val currentTime = SimpleDateFormat("HH시", Locale.getDefault()).format(Date())
-		binding.nowTime.text = "$currentTime 실종자"
+		viewModel.fetchMissingPersons("DISTANCE", 37.5665, 126.9780)
+
+		// 관찰하여 데이터를 리사이클러뷰에 갱신
+		viewModel.missingPersons.observe(viewLifecycleOwner) { missingPersons ->
+			(binding.recyclerViewReportList.adapter as? MissingPersonAdapter)?.submitList(missingPersons)
+		}
 	}
 
 	private fun setupRecyclerView() {
-		missingPersonAdapter = MissingPersonAdapter { missingPerson, view ->
+		binding.recyclerViewReportList.adapter = MissingPersonAdapter { missingPerson, view ->
 			when (view.id) {
 				R.id.btnReport -> {
-					// ReportRegistrationFragment로 이동
 					val bundle = Bundle().apply {
-						putParcelable("missingPerson", missingPerson) // MissingPerson 객체 전달
+						putParcelable("missingPerson", missingPerson)
 					}
 					findNavController().navigate(R.id.action_reportFragment_to_reportRegistrationFragment, bundle)
 				}
 				else -> {
-					// ReportDetailFragment로 이동
 					val bundle = Bundle().apply {
-						putParcelable("missingPerson", missingPerson) // MissingPerson 객체 전달
+						putParcelable("missingPerson", missingPerson)
 					}
 					findNavController().navigate(R.id.action_reportFragment_to_reportDetailFragment, bundle)
 				}
 			}
 		}
 
-		binding.recyclerViewReportList.apply {
-			layoutManager = LinearLayoutManager(context)
-			adapter = missingPersonAdapter
-		}
+		// 레이아웃 매니저 설정
+		binding.recyclerViewReportList.layoutManager = LinearLayoutManager(context)
 	}
-
 }

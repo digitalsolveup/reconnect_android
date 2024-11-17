@@ -6,7 +6,10 @@
     <data>
         <variable
             name="missingPerson"
-            type="com.mobile.reconnect.data.model.MissingPerson" />
+            type="com.mobile.reconnect.data.model.report.MissingPersonDetailResponse" />
+        <variable
+            name="viewModel"
+            type="com.mobile.reconnect.ui.report.viewmodel.MissingPersonViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -67,7 +70,7 @@
                     android:id="@+id/missingPersonImage"
                     android:layout_width="360dp"
                     android:layout_height="354dp"
-                    app:imageResource="@{missingPerson.imageResId}"
+                    app:imageUrl="@{missingPerson.imageURL}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -80,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:background="#FFC107"
-                    android:text="@{' ' + missingPerson.specialFeature.label+' '}"
+                    android:text="@{' ' + missingPerson.specialFeatureLabel+' '}"
                     android:textSize="17sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -111,7 +114,7 @@
                     android:layout_marginTop="12dp"
                     android:lineSpacingExtra="16sp"
                     android:padding="2dp"
-                    android:text="@{'(' + missingPerson.nationality.label + ',' + missingPerson.gender.label + ',' + missingPerson.age +'세' +')'}"
+                    android:text="@{'(' + missingPerson.nationalityLabel + ',' + missingPerson.genderLabel + ',' + missingPerson.age +'세' +')'}"
                     android:textColor="@color/gray_700"
                     android:textSize="15sp"
                     app:layout_constraintStart_toEndOf="@+id/textView1"
@@ -436,7 +439,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="64dp"
                     android:layout_marginTop="4dp"
-                    android:text="@{missingPerson.bodyType.label}"
+                    android:text="@{missingPerson.bodyTypeLabel}"
                     android:textAlignment="center"
                     android:textColor="@color/gray_800"
                     android:textSize="15sp"
@@ -451,7 +454,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="64dp"
                     android:layout_marginTop="4dp"
-                    android:text="@{missingPerson.faceType.label}"
+                    android:text="@{missingPerson.faceTypeLabel}"
                     android:textAlignment="center"
                     android:textColor="@color/gray_800"
                     android:textSize="15sp"

@@ -33,13 +33,10 @@ object NetworkClient {
 	@Provides
 	@Singleton
 	fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
-//		val gson = GsonBuilder()
-//			.create()
-
 		return Retrofit.Builder()
 			.baseUrl(BuildConfig.BASE_URL)
 			.client(okHttpClient)
-			.addConverterFactory(GsonConverterFactory.create())
+			.addConverterFactory(GsonConverterFactory.create())  // Gson을 이용해 JSON 변환
 			.build()
 	}
 
@@ -54,5 +51,12 @@ object NetworkClient {
 	fun provideApiService(retrofit: Retrofit): ApiService {
 		return retrofit.create(ApiService::class.java)
 	}
+
+	@Provides
+	@Singleton
+	fun provideMissingPersonApi(retrofit: Retrofit): MissingPersonApi {
+		return retrofit.create(MissingPersonApi::class.java)
+	}
+
 
 }

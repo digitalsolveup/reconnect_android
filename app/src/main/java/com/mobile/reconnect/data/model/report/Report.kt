@@ -1,4 +1,4 @@
-package com.mobile.reconnect.data.model
+package com.mobile.reconnect.data.model.report
 
 import java.time.LocalDateTime
 
