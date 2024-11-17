@@ -9,7 +9,10 @@ import com.mobile.reconnect.data.model.report.MissingPersonDetailResponse
 import com.mobile.reconnect.data.model.report.MissingPersonListResponse
 import com.mobile.reconnect.data.repository.MissingPersonRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,6 +25,13 @@ class MissingPersonViewModel @Inject constructor(
 
 	private val _missingPersonDetail = MutableLiveData<MissingPersonDetailResponse>()
 	val missingPersonDetail: LiveData<MissingPersonDetailResponse> get() = _missingPersonDetail
+
+	private val _currentTime = MutableLiveData<String>()
+	val currentTime: LiveData<String> get() = _currentTime
+
+	init {
+		updateCurrentTime()
+	}
 
 	fun fetchMissingPersons(sortBy: String, latitude: Double, longitude: Double) {
 		viewModelScope.launch {
@@ -41,6 +51,17 @@ class MissingPersonViewModel @Inject constructor(
 				_missingPersonDetail.postValue(response)
 			} catch (e: Exception) {
 				Log.e("MissingPersonViewModel", "Error fetching details: ${e.message}")
+			}
+		}
+	}
+
+	private fun updateCurrentTime() {
+		viewModelScope.launch {
+			while (true) {
+				val dateFormat = SimpleDateFormat("HH", Locale.getDefault())
+				val currentTimeString = dateFormat.format(Date())
+				_currentTime.postValue(currentTimeString)
+				delay(60 * 1000L) // 1분마다 업데이트
 			}
 		}
 	}
