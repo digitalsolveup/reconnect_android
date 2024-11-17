@@ -40,7 +40,7 @@ class SearchFilteringFeatureFragment : BottomSheetDialogFragment() {
 
 		binding.btnNonDisabled.setOnClickListener {
 			setChipClickListener(binding.btnNonDisabled, R.color.primary_red, R.color.gray_300)
-			feature = "NONE"
+			feature = "NON_DISABLED_CHILD"
 			request = SearchRequest(specialFeature = feature)
 		}
 

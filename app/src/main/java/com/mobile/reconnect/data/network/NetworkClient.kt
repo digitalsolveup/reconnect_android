@@ -8,6 +8,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import com.mobile.reconnect.BuildConfig
+import com.mobile.reconnect.data.network.api.report.MissingPersonApi
 import com.mobile.reconnect.data.network.api.search.SearchApi
 import dagger.Module
 import dagger.Provides

@@ -105,7 +105,9 @@ dependencies {
 	//OkHttp 라이브러리
 	implementation ("com.squareup.okhttp3:okhttp:4.10.0")
 	implementation(libs.androidx.espresso.core)
-
+	implementation(files("libs/oauth-5.9.0.aar"))
+	implementation ("com.android.support:appcompat-v7:28.0.0")
+//	implementation("com.navercorp.nid:oauth:5.9.0")
 
 	// Testing
 	testImplementation(libs.junit)
@@ -136,4 +138,7 @@ dependencies {
 	//rx
 	implementation("io.reactivex.rxjava2:rxjava:2.2.5")
 	implementation("io.reactivex.rxjava2:rxandroid:2.1.0")
+
+	implementation("com.airbnb.android:lottie:5.0.0")
+	implementation("androidx.security:security-crypto:1.1.0-alpha03")
 }

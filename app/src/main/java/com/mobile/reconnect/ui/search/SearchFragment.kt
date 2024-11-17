@@ -28,7 +28,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
 		super.onViewCreated(view, savedInstanceState)
 
 		setupRecyclerView()
-		viewModel.searchMissingPersons(request) // 실종자 목록 조회
+//		viewModel.searchMissingPersons(request) // 실종자 목록 조회
+		viewModel.searchMissingPersonsFiltering(temporary()) // 임시 실종자 목록 조회
 
 		// 검색 뷰 설정
 		binding.searchView.setOnQueryTextListener(object :
@@ -122,12 +123,31 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
 			chip.setChipStrokeColorResource(unselectedColor)
 			chip.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray_600))
 
-			viewModel.searchMissingPersons(request) // 실종자 목록 조회
+//			viewModel.searchMissingPersons(request) // 실종자 목록 조회
+			viewModel.searchMissingPersonsFiltering(temporary()) // 임시 실종자 목록 조회
 		} else {
 			chip.setChipStrokeColorResource(selectedColor)
 			chip.setTextColor(ContextCompat.getColor(requireContext(), selectedColor))
 		}
 
 		chip.isChecked = !chip.isChecked
+	}
+
+	private fun temporary(): SearchRequest {
+		var age = ""
+		var gender = ""
+		var feature = ""
+
+		val genderValue = gender.ifEmpty { null }
+		val ageValue = if (age.isNotEmpty()) age.toInt() else null
+		val featureValue = feature.ifEmpty { null }
+
+		val request = SearchRequest(
+			gender = genderValue,
+			age = ageValue,
+			specialFeature = featureValue
+		)
+
+		return request
 	}
 }

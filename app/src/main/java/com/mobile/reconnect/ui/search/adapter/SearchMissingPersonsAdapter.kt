@@ -27,9 +27,9 @@ class SearchMissingPersonsAdapter(
 		val person = getItem(position)
 		holder.bind(person)
 
-//		holder.itemView.setOnClickListener {
-//			onItemClicked(person)
-//		}
+		holder.itemView.setOnClickListener {
+			onItemClicked(person)
+		}
 	}
 
 	class MissingPersonViewHolder(private val binding: ItemMissingPersonBinding) :
@@ -39,6 +39,7 @@ class SearchMissingPersonsAdapter(
 
 			val specialFeatureText = when (person.specialFeature) {
 				"NONE" -> ""
+				"NON_DISABLED_CHILD" -> ", 비장애아동"
 				"DISABILITY" -> ", 장애"
 				"DEMENTIA" -> ", 치매"
 				"RUNAWAY" -> ", 가출인"

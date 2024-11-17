@@ -292,13 +292,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(R.layout.fragment_map) {
 		lodLabel = layer!!.addLodLabel(options)
 	}
 
-	private fun removeLocationLabel() {
-		lodLabel?.let {
-			kakaoMap!!.labelManager!!.lodLayer!!.remove(it)
-			lodLabel = null
-		}
-	}
-
 	/***
 	 * stomp
 	 */
@@ -392,8 +385,8 @@ class MapFragment : BaseFragment<FragmentMapBinding>(R.layout.fragment_map) {
 		combinedLocation.observe(viewLifecycleOwner) { (latitude, longitude) ->
 			val data = JSONObject().apply {
 				put("userLocation", JSONObject().apply {
-					put("latitude", latitude)
-					put("longitude", longitude)
+					put("lat", latitude)
+					put("lng", longitude)
 				})
 				put("radius", viewModel.radius.value)
 			}
@@ -409,16 +402,21 @@ class MapFragment : BaseFragment<FragmentMapBinding>(R.layout.fragment_map) {
 			try {
 				// JSONArray로 변환
 				val jsonArray = JSONArray(topicMessage.payload)
+				val locationList = mutableListOf<JSONObject>()
 
-				// 각 위치 데이터를 처리
 				for (i in 0 until jsonArray.length()) {
 					val locationObject = jsonArray.getJSONObject(i)
+					locationList.add(locationObject)
+				}
 
+				// 리스트 내 각 위치 데이터를 처리
+				for (location in locationList) {
+					Log.d("Location Data", location.toString())
 					// 위치 정보 추출
-					val latitude = locationObject?.optDouble("latitude", 0.0)
-					val longitude = locationObject?.optDouble("longitude", 0.0)
+					val latitude = location.optDouble("lat", 0.0)
+					val longitude = location.optDouble("lng", 0.0)
 
-					drawLocationLabel(latitude!!, longitude!!)
+					drawLocationLabel(latitude, longitude)
 				}
 			} catch (e: JSONException) {
 				e.printStackTrace()
@@ -465,8 +463,8 @@ class MapFragment : BaseFragment<FragmentMapBinding>(R.layout.fragment_map) {
 		combinedLocation.observe(viewLifecycleOwner) { (latitude, longitude) ->
 			val data = JSONObject().apply {
 				put("userLocation", JSONObject().apply {
-					put("latitude", latitude)
-					put("longitude", longitude)
+					put("lat", latitude)
+					put("lng", longitude)
 				})
 				put("radius", viewModel.radius.value)
 				put("missedUserSeq", id)
@@ -501,7 +499,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(R.layout.fragment_map) {
 	private fun showItemDetails(id: Int) {
 		println("클릭된 아이템 ID: $id")
 		runStompTopicPredictedLocations(id)
-		removeLocationLabel()
 	}
 
 	/***
@@ -516,7 +513,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(R.layout.fragment_map) {
 			if (location != null) {
 				val currentLatLng = LatLng.from(location.latitude, location.longitude)
 
-				// 반지름 200 미터(meter) 의 원형 폴리곤
 				val circleOptions: PolygonOptions = PolygonOptions.from(
 					DotPoints.fromCircle(
 						currentLatLng,

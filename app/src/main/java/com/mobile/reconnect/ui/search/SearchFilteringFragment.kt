@@ -82,11 +82,15 @@ class SearchFilteringFragment : BottomSheetDialogFragment() {
 		}
 
 		binding.btnSearch.setOnClickListener {
+			val genderValue = gender.ifEmpty { null }
+			val ageValue = if (age.isNotEmpty()) age.toInt() else null
+			val featureValue = feature.ifEmpty { null }
+
 			viewModel.searchMissingPersonsFiltering(
 				SearchRequest(
-					gender = gender,
-					age = age.toInt(),
-					specialFeature = feature
+					gender = genderValue,
+					age = ageValue,
+					specialFeature = featureValue
 				)
 			)
 			dismiss()
