@@ -24,6 +24,7 @@ class ReportFragment : BaseFragment<FragmentReportBinding>(R.layout.fragment_rep
 		binding.lifecycleOwner = viewLifecycleOwner
 		binding.viewModel = viewModel
 
+
 		// RecyclerView 설정
 		setupRecyclerView()
 
