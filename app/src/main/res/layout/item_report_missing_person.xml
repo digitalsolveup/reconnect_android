@@ -6,7 +6,7 @@
     <data>
         <variable
             name="missingPerson"
-            type="com.mobile.reconnect.data.model.MissingPerson" />
+            type="com.mobile.reconnect.data.model.report.MissingPersonListResponse" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -25,7 +25,7 @@
                 android:id="@+id/appCompatImageView"
                 android:layout_width="70dp"
                 android:layout_height="0dp"
-                app:imageResource="@{missingPerson.imageResId}"
+                app:imageUrl="@{missingPerson.imageURL}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -46,7 +46,7 @@
                 style="@style/RegularFontKr.14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text='@{"(" + missingPerson.gender.label + ", " + missingPerson.age + "세, " + missingPerson.height + "cm, " + missingPerson.weight + "kg, " + missingPerson.specialFeature.label + ")"}'
+                android:text='@{"(" + missingPerson.genderLabel + ", " + missingPerson.age + "세, " + missingPerson.height + "cm, " + missingPerson.weight + "kg, " + missingPerson.specialFeatureLabel + ")"}'
                 android:textColor="@color/gray_800"
                 app:layout_constraintStart_toStartOf="@+id/tv_person_name"
                 app:layout_constraintTop_toBottomOf="@+id/tv_person_name" />

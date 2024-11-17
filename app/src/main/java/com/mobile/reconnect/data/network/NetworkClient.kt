@@ -1,18 +1,17 @@
 package com.mobile.reconnect.data.network
 
-import android.content.Context
 import java.net.CookieManager
 import okhttp3.JavaNetCookieJar
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import com.mobile.reconnect.BuildConfig
+import com.mobile.reconnect.data.network.api.report.MissingPersonApi
 import com.mobile.reconnect.data.network.api.search.SearchApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
@@ -50,5 +49,12 @@ object NetworkClient {
 	fun provideApiService(retrofit: Retrofit): ApiService {
 		return retrofit.create(ApiService::class.java)
 	}
+
+	@Provides
+	@Singleton
+	fun provideMissingPersonApi(retrofit: Retrofit): MissingPersonApi {
+		return retrofit.create(MissingPersonApi::class.java)
+	}
+
 
 }

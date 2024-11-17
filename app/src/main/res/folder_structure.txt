@@ -1,0 +1,145 @@
+.
+├── color
+│   ├── chip_selected_red_or_black.xml
+│   ├── chip_selected_red_or_blue.xml
+│   ├── chip_selected_red_or_gray200.xml
+│   ├── chip_selected_red_or_gray300.xml
+│   ├── chip_selected_red_or_gray600.xml
+│   ├── chip_selected_red_or_gray700.xml
+│   ├── map_chip_item_color.xml
+│   └── navigation_item_color.xml
+├── drawable
+│   ├── background_home_bottom_sheet.xml
+│   ├── bg_gray100_radius_8.xml
+│   ├── bg_gray_300_radius_4.xml
+│   ├── bg_gray_radius_4.xml
+│   ├── bg_gray_rectangle.xml
+│   ├── bg_light_pink_radius_3.xml
+│   ├── bg_my_card_view_color.xml
+│   ├── bg_primary_red_radius_4.xml
+│   ├── bg_white_100_radius_gray.xml
+│   ├── bg_white_10_radius_gray.xml
+│   ├── bg_white_4_radius_gray.xml
+│   ├── bg_white_gray_radius_4.xml
+│   ├── check_on.xml
+│   ├── child1.png
+│   ├── ic_arrow_right.xml
+│   ├── ic_back.xml
+│   ├── ic_baseline_map_24.xml
+│   ├── ic_baseline_my_24.xml
+│   ├── ic_baseline_report_24.xml
+│   ├── ic_baseline_search_24.xml
+│   ├── ic_bell_24.jpg
+│   ├── ic_close.xml
+│   ├── ic_dashboard_black_24dp.xml
+│   ├── ic_filtering.xml
+│   ├── ic_home_black_24dp.xml
+│   ├── ic_join_check.xml
+│   ├── ic_kakao_login.xml
+│   ├── ic_launcher_background.xml
+│   ├── ic_launcher_foreground.xml
+│   ├── ic_my_location.png
+│   ├── ic_my_megaphone.png
+│   ├── ic_my_paste.png
+│   ├── ic_naver_login.xml
+│   ├── ic_notifications_black_24dp.xml
+│   ├── ic_orange_circle.xml
+│   ├── ic_predicted_location.png
+│   ├── ic_reconnect_logo.xml
+│   ├── ic_x.xml
+│   ├── icon_note.png
+│   ├── icon_plus.png
+│   ├── map_chip_1km_color.xml
+│   ├── map_chip_2km_color.xml
+│   ├── map_chip_3km_color.xml
+│   ├── map_chip_4km_color.xml
+│   ├── map_chip_5km_color.xml
+│   ├── rounded_edittext_background.xml
+│   ├── senior1.jpeg
+│   └── solid_gray_200_4.xml
+├── folder_structure.txt
+├── font
+│   ├── pretendard_black.ttf
+│   ├── pretendard_bold.ttf
+│   ├── pretendard_extrabold.ttf
+│   ├── pretendard_extralight.ttf
+│   ├── pretendard_light.ttf
+│   ├── pretendard_medium.ttf
+│   ├── pretendard_regular.ttf
+│   ├── pretendard_semibold.ttf
+│   └── pretendard_thin.ttf
+├── layout
+│   ├── activity_join.xml
+│   ├── activity_login.xml
+│   ├── activity_main.xml
+│   ├── fragment_file_report.xml
+│   ├── fragment_file_report2.xml
+│   ├── fragment_file_report_complete.xml
+│   ├── fragment_file_report_map.xml
+│   ├── fragment_home_bottom.xml
+│   ├── fragment_map.xml
+│   ├── fragment_my.xml
+│   ├── fragment_my_info.xml
+│   ├── fragment_my_notification.xml
+│   ├── fragment_my_preperson.xml
+│   ├── fragment_my_preperson10.xml
+│   ├── fragment_my_preperson11.xml
+│   ├── fragment_my_preperson2.xml
+│   ├── fragment_my_preperson3.xml
+│   ├── fragment_my_preperson4.xml
+│   ├── fragment_my_preperson5.xml
+│   ├── fragment_my_preperson6.xml
+│   ├── fragment_my_preperson7.xml
+│   ├── fragment_my_preperson8.xml
+│   ├── fragment_my_preperson9.xml
+│   ├── fragment_my_report.xml
+│   ├── fragment_report.xml
+│   ├── fragment_report_datail.xml
+│   ├── fragment_report_registration.xml
+│   ├── fragment_search.xml
+│   ├── fragment_search_filtering.xml
+│   ├── fragment_search_filtering_age.xml
+│   ├── fragment_search_filtering_feature.xml
+│   ├── fragment_search_filtering_gender.xml
+│   ├── item_file_report.xml
+│   ├── item_missing_person.xml
+│   ├── item_my_noti_list.xml
+│   ├── item_my_preperson_list.xml
+│   ├── item_my_report_list.xml
+│   └── item_report_missing_person.xml
+├── menu
+│   └── bottom_nav_menu.xml
+├── mipmap-anydpi
+│   ├── ic_launcher.xml
+│   └── ic_launcher_round.xml
+├── mipmap-hdpi
+│   ├── ic_launcher.webp
+│   └── ic_launcher_round.webp
+├── mipmap-mdpi
+│   ├── ic_launcher.webp
+│   └── ic_launcher_round.webp
+├── mipmap-xhdpi
+│   ├── ic_launcher.webp
+│   └── ic_launcher_round.webp
+├── mipmap-xxhdpi
+│   ├── ic_launcher.webp
+│   └── ic_launcher_round.webp
+├── mipmap-xxxhdpi
+│   ├── ic_launcher.webp
+│   └── ic_launcher_round.webp
+├── navigation
+│   └── mobile_navigation.xml
+├── values
+│   ├── colors.xml
+│   ├── dimens.xml
+│   ├── strings.xml
+│   ├── text.xml
+│   └── themes.xml
+├── values-night
+│   └── themes.xml
+└── xml
+    ├── backup_rules.xml
+    ├── data_extraction_rules.xml
+    └── file_paths.xml
+
+16 directories, 127 files

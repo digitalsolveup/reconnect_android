@@ -1,0 +1,111 @@
+.
+├── GlobalApplication.kt
+├── MainActivity.kt
+├── auth
+│   └── AuthCodeHandlerActivity.kt
+├── data
+│   ├── model
+│   │   ├── MissingPerson.kt
+│   │   ├── MissingPerson_ex.kt
+│   │   ├── MyNotificationList.kt
+│   │   ├── MyReportList.kt
+│   │   ├── PrePerson.kt
+│   │   ├── User.kt
+│   │   ├── enumeration
+│   │   │   └── Status.kt
+│   │   ├── report
+│   │   │   ├── MissingPersonDetailResponse.kt
+│   │   │   ├── MissingPersonListResponse.kt
+│   │   │   └── Report.kt
+│   │   └── search
+│   │       ├── SearchRequest.kt
+│   │       └── SearchResponse.kt
+│   ├── network
+│   │   ├── ApiClient.kt
+│   │   ├── ApiService.kt
+│   │   ├── NetworkClient.kt
+│   │   ├── WebSocketListener.kt
+│   │   └── api
+│   │       ├── report
+│   │       │   └── MissingPersonApi.kt
+│   │       └── search
+│   │           └── SearchApi.kt
+│   └── repository
+│       ├── MissingPersonRepository.kt
+│       ├── SearchRepository.kt
+│       └── UserRepository.kt
+├── folder_structure.txt
+├── ui
+│   ├── common
+│   │   ├── BaseActivity.kt
+│   │   ├── BaseFragment.kt
+│   │   └── NavigationUtil.kt
+│   ├── login
+│   │   ├── JoinActivity.kt
+│   │   └── LoginActivity.kt
+│   ├── map
+│   │   ├── HomeBottomFragment.kt
+│   │   ├── MapFragment.kt
+│   │   ├── adapter
+│   │   │   └── MissingPersonsAdapter.kt
+│   │   └── viewmodel
+│   │       ├── HomeBottomViewModel.kt
+│   │       └── MapViewModel.kt
+│   ├── my
+│   │   ├── MyFragment.kt
+│   │   ├── MyInfoFragment.kt
+│   │   ├── MyNotificationFragment.kt
+│   │   ├── MyPrepersonFragment.kt
+│   │   ├── MyPrepersonFragment10.kt
+│   │   ├── MyPrepersonFragment11.kt
+│   │   ├── MyPrepersonFragment2.kt
+│   │   ├── MyPrepersonFragment3.kt
+│   │   ├── MyPrepersonFragment4.kt
+│   │   ├── MyPrepersonFragment5.kt
+│   │   ├── MyPrepersonFragment6.kt
+│   │   ├── MyPrepersonFragment7.kt
+│   │   ├── MyPrepersonFragment8.kt
+│   │   ├── MyPrepersonFragment9.kt
+│   │   ├── adapter
+│   │   │   ├── MyReportAdapter.kt
+│   │   │   ├── NotificationAdapter.kt
+│   │   │   ├── PrePersonAdapter.kt
+│   │   │   └── PrepersonBindingAdapters.kt
+│   │   ├── fileReport
+│   │   │   ├── FileReport2Fragment.kt
+│   │   │   ├── FileReportFragment.kt
+│   │   │   └── FileReportMapFragment.kt
+│   │   ├── myReport
+│   │   │   └── MyReportFragment.kt
+│   │   └── viewmodel
+│   │       ├── MyViewModel.kt
+│   │       ├── NotificationViewModel.kt
+│   │       ├── PrepersonViewModel.kt
+│   │       └── ReportViewModel.kt
+│   ├── report
+│   │   ├── ReportDatailFragment.kt
+│   │   ├── ReportFragment.kt
+│   │   ├── ReportRegistrationFragment.kt
+│   │   ├── adapter
+│   │   │   └── MissingPersonAdapter.kt
+│   │   └── viewmodel
+│   │       └── MissingPersonViewModel.kt
+│   └── search
+│       ├── SearchFilteringAgeFragment.kt
+│       ├── SearchFilteringFeatureFragment.kt
+│       ├── SearchFilteringFragment.kt
+│       ├── SearchFilteringGenderFragment.kt
+│       ├── SearchFragment.kt
+│       ├── adapter
+│       │   └── SearchMissingPersonsAdapter.kt
+│       └── viewmodel
+│           └── SearchViewModel.kt
+└── utils
+    ├── BindingAdapters.kt
+    ├── Constants.kt
+    ├── DateUtil.kt
+    ├── Event.kt
+    ├── EventObserver.kt
+    └── FileUtil.kt
+
+30 directories, 79 files
