@@ -7,6 +7,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
+
 interface MissingPersonApi {
 	@GET("/api/missing_person")
 	suspend fun getMissingPersons(

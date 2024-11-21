@@ -18,6 +18,7 @@ class ReportRegistrationFragment : Fragment(R.layout.fragment_report_registratio
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentReportRegistrationBinding.bind(view)
 
+
         // reportbtn 클릭 시 MyReportFragment로 이동
         binding.reportbtn.setOnClickListener {
             findNavController().navigate(R.id.action_reportRegistrationFragment_to_myReportFragment)

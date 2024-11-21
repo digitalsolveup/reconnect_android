@@ -34,7 +34,6 @@ class MissingPersonAdapter(
 			binding.root.setOnClickListener { onClick(item, it) }
 		}
 	}
-
 	companion object DiffCallback : DiffUtil.ItemCallback<MissingPersonListResponse>() {
 		override fun areItemsTheSame(
 			oldItem: MissingPersonListResponse,

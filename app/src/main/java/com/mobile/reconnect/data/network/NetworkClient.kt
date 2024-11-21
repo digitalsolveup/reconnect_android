@@ -66,5 +66,4 @@ object NetworkClient {
 		return retrofit.create(ReportApi::class.java)
 	}
 
-
 }

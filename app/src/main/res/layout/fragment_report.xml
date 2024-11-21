@@ -37,7 +37,6 @@
                 tools:layout_editor_absoluteX="22dp"
                 tools:layout_editor_absoluteY="12dp" />
         </androidx.appcompat.widget.Toolbar>
-
         <HorizontalScrollView
             android:id="@+id/horizontalScrollView"
             android:layout_width="0dp"

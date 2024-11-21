@@ -27,6 +27,7 @@ class ReportFragment : BaseFragment<FragmentReportBinding>(R.layout.fragment_rep
 		binding.lifecycleOwner = viewLifecycleOwner
 		binding.viewModel = viewModel
 
+
 		// RecyclerView 설정
 		binding.lifecycleOwner = viewLifecycleOwner // LiveData 바인딩 활성화
 		val now = Calendar.getInstance().time

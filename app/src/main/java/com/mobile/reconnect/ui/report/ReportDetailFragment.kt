@@ -49,7 +49,7 @@ class ReportDetailFragment : BaseFragment<FragmentReportDetailBinding>(R.layout.
     }
 
     private fun setupObservers() {
-        // 실종자 상세 정보 관찰
+        // 실종자 상세 정보
         viewModel.missingPersonDetail.observe(viewLifecycleOwner) { detail ->
             if (detail != null) {
                 binding.missingPerson = detail
