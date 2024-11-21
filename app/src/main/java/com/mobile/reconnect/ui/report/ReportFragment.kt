@@ -12,6 +12,9 @@ import com.mobile.reconnect.ui.common.BaseFragment
 import com.mobile.reconnect.ui.report.adapter.MissingPersonAdapter
 import com.mobile.reconnect.ui.report.viewmodel.MissingPersonViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 @AndroidEntryPoint
 class ReportFragment : BaseFragment<FragmentReportBinding>(R.layout.fragment_report) {
@@ -25,12 +28,20 @@ class ReportFragment : BaseFragment<FragmentReportBinding>(R.layout.fragment_rep
 		binding.viewModel = viewModel
 
 		// RecyclerView 설정
+		binding.lifecycleOwner = viewLifecycleOwner // LiveData 바인딩 활성화
+		val now = Calendar.getInstance().time
+		val dateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+		binding.nowTime.text = dateFormat.format(now)+"시 실종자"
+			binding.radiusGroup.setOnCheckedChangeListener { _, checkedId ->
+			when (checkedId) {
+				R.id.radius_2km -> viewModel.fetchMissingPersons("DISTANCE", 37.5665, 126.9780)
+				R.id.radius_3km -> viewModel.fetchMissingPersons("REGISTRATION", 37.5665, 126.9780)
+				R.id.radius_4km -> viewModel.fetchMissingPersons("REPORT_COUNT", 37.5665, 126.9780)
+			}
+		}
+
 		setupRecyclerView()
 
-		// ChipGroup 설정
-		setupChipGroup()
-
-		// 초기 데이터 로드: 거리순 정렬로 기본 설정
 		viewModel.fetchMissingPersons("DISTANCE", 37.5665, 126.9780)
 		binding.radiusGroup.check(R.id.radius_2km) // 기본 선택
 	}

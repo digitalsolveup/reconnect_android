@@ -1,5 +1,7 @@
 package com.mobile.reconnect.ui.my
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -19,7 +21,12 @@ class MyFragment : BaseFragment<FragmentMyBinding>(R.layout.fragment_my) {
 		binding.tvMyInfoUpdate.setOnClickListener { navigate(R.id.action_navigation_mypage_to_navigation_my_info) }
 		binding.tvMyReport.setOnClickListener { navigate(R.id.action_navigation_mypage_to_navigation_my_report) }
 		binding.tvMyNotification.setOnClickListener { navigate(R.id.action_navigation_mypage_to_navigation_my_noti) }
-		binding.cardReport.setOnClickListener { navigate(R.id.action_navigation_mypage_to_navigation_file_report) }
+		binding.cardReport.setOnClickListener {
+//			navigate(R.id.action_navigation_mypage_to_navigation_file_report)
+			val myUri = Uri.parse("tel:182")
+			val myIntent = Intent(Intent.ACTION_DIAL, myUri)
+			startActivity(myIntent)
+		}
 	}
 
 }

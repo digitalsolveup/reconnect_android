@@ -35,6 +35,7 @@ class SearchViewModel @Inject constructor(
 	val error: LiveData<String> get() = _error
 
 	private var currentPage = 0
+	private var size = 10
 
 	/***
 	 * 실종자 검색
@@ -63,6 +64,70 @@ class SearchViewModel @Inject constructor(
 									missingPerson.specialFeature == query.specialFeature
 						}
 
+						if (filteredList.isNotEmpty()) {
+							_missingPersons.value = filteredList
+							currentPage++
+							Log.d("SearchViewModel", "성공: ${filteredList.size}개 결과 찾음")
+						} else {
+							Log.d("SearchViewModel", "검색 결과 없음: $query")
+							_missingPersons.value = emptyList()
+						}
+					} else {
+						Log.d("SearchViewModel", "데이터 없음")
+						_missingPersons.value = emptyList()
+					}
+				} else {
+					// 실패 시 처리
+					Log.e(
+						"SearchViewModel",
+						"오류: ${response.code()} - ${response.message()} - ${response.body()}"
+					)
+					_error.value = "검색 결과를 가져오지 못했습니다."
+				}
+			}
+
+			override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
+				// 네트워크 오류 처리
+				Log.e("SearchViewModel", "Network error: ${t.localizedMessage}")
+				_error.value = "네트워크 오류가 발생했습니다."
+			}
+		})
+	}
+
+	fun searchMissingPersonsFiltering(query: SearchRequest) {
+		val pageable = PageableRequest(currentPage, 10)
+		Log.d("SearchViewModel", "Searching for: $query with page: $currentPage")
+
+		searchRepository.searchMissingPerson(query, pageable).enqueue(object :
+			Callback<SearchResponse> {
+			override fun onResponse(
+				call: Call<SearchResponse>,
+				response: Response<SearchResponse>
+			) {
+				if (response.isSuccessful) {
+					// 성공적인 응답 처리
+					val responseBody = response.body()
+					if (responseBody != null && responseBody.content.isNotEmpty()) {
+
+						// 필터링
+						var filteredList = responseBody.content.filter { missingPerson ->
+							(query.name == null || missingPerson.name.equals(query.name, ignoreCase = true)) &&
+									(query.gender == null || missingPerson.gender == query.gender) &&
+									(query?.age == null || isAgeInRange(missingPerson.age, query.age)) &&
+									(query.specialFeature == null || missingPerson.specialFeature == query.specialFeature)
+//									(query.lastSeenLocation == null || missingPerson.location == query.lastSeenLocation)
+						}
+
+
+						// 필터링된 리스트를 _missingPersons에 업데이트
+						if (filteredList.isNotEmpty()) {
+							_missingPersons.value = filteredList
+							currentPage++
+							Log.d("SearchViewModel", "성공: ${filteredList.size}개 결과 찾음")
+						} else {
+							Log.d("SearchViewModel", "검색 결과 없음: $query")
+							_missingPersons.value = emptyList()
+						}
 						// 필터링된 리스트를 _missingPersons에 업데이트
 						if (filteredList.isNotEmpty()) {
 							_missingPersons.value = filteredList
@@ -96,5 +161,80 @@ class SearchViewModel @Inject constructor(
 
 	fun setFilters(boolean: Boolean) {
 		_ifFiltered.value = boolean
+	}
+
+	fun getMissingPersons(query: SearchRequest) {
+		val pageable = PageableRequest(currentPage, 10)
+		Log.d("SearchViewModel", "Searching for: $query with page: $currentPage")
+
+		searchRepository.searchMissingPerson(query, pageable).enqueue(object :
+			Callback<SearchResponse> {
+			override fun onResponse(
+				call: Call<SearchResponse>,
+				response: Response<SearchResponse>
+			) {
+				if (response.isSuccessful) {
+					// 성공적인 응답 처리
+					val responseBody = response.body()
+					if (responseBody != null && responseBody.content.isNotEmpty()) {
+
+						// 필터링
+						var filteredList = responseBody.content.filter { missingPerson ->
+							(query.name == null || missingPerson.name.equals(query.name, ignoreCase = true)) &&
+									(query.gender == null || missingPerson.gender == query.gender) &&
+									(query?.age == null || isAgeInRange(missingPerson.age, query.age)) &&
+									(query.specialFeature == null || missingPerson.specialFeature == query.specialFeature)
+						}
+
+
+						// 필터링된 리스트를 _missingPersons에 업데이트
+						if (filteredList.isNotEmpty()) {
+							_missingPersons.value = filteredList
+							currentPage++
+							Log.d("SearchViewModel", "성공: ${filteredList.size}개 결과 찾음")
+						} else {
+							Log.d("SearchViewModel", "검색 결과 없음: $query")
+							_missingPersons.value = emptyList()
+						}
+						// 필터링된 리스트를 _missingPersons에 업데이트
+						if (filteredList.isNotEmpty()) {
+							_missingPersons.value = filteredList
+							currentPage++
+							Log.d("SearchViewModel", "성공: ${filteredList.size}개 결과 찾음")
+						} else {
+							Log.d("SearchViewModel", "검색 결과 없음: $query")
+							_missingPersons.value = emptyList()
+						}
+					} else {
+						Log.d("SearchViewModel", "데이터 없음")
+						_missingPersons.value = emptyList()
+					}
+				} else {
+					// 실패 시 처리
+					Log.e(
+						"SearchViewModel",
+						"오류: ${response.code()} - ${response.message()} - ${response.body()}"
+					)
+					_error.value = "검색 결과를 가져오지 못했습니다."
+				}
+			}
+
+			override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
+				// 네트워크 오류 처리
+				Log.e("SearchViewModel", "Network error: ${t.localizedMessage}")
+				_error.value = "네트워크 오류가 발생했습니다."
+			}
+		})
+	}
+
+
+	fun isAgeInRange(missingPersonAge: Int, queryAge: Int?): Boolean {
+		if (queryAge == null) return true
+
+
+		val ageRangeStart = (queryAge / 10) * 10
+		val ageRangeEnd = ageRangeStart + 9
+
+		return missingPersonAge in ageRangeStart..ageRangeEnd  // 범위에 포함되는지 확인
 	}
 }

@@ -9,6 +9,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.mobile.reconnect.R
 import com.mobile.reconnect.databinding.FragmentSearchFilteringBinding
 import androidx.core.content.ContextCompat
+import androidx.core.widget.doAfterTextChanged
+import androidx.fragment.app.activityViewModels
+import com.mobile.reconnect.data.model.search.SearchRequest
+import com.mobile.reconnect.ui.search.viewmodel.SearchViewModel
 import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,6 +20,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class SearchFilteringFragment : BottomSheetDialogFragment() {
 	private var _binding: FragmentSearchFilteringBinding? = null
 	private val binding get() = _binding!!
+
+	private val viewModel: SearchViewModel by activityViewModels()
+	private var request = SearchRequest()
 
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,
@@ -27,22 +34,68 @@ class SearchFilteringFragment : BottomSheetDialogFragment() {
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
+		var age = ""
+		var gender = ""
+		var feature = ""
+		var location = ""
 
 		binding.btnMale.setOnClickListener {
 			selectGender(binding.btnMale, binding.btnFemale)
+			gender = "MALE"
 		}
 
 		binding.btnFemale.setOnClickListener {
 			selectGender(binding.btnFemale, binding.btnMale)
+			gender = "FEMALE"
 		}
 
-		setChipClickListener(binding.btnNonDisabled, R.color.primary_red, R.color.gray_300)
-		setChipClickListener(binding.btnDementia, R.color.primary_red, R.color.gray_300)
-		setChipClickListener(binding.btnRunaway, R.color.primary_red, R.color.gray_300)
-		setChipClickListener(binding.btnDisabled, R.color.primary_red, R.color.gray_300)
-		setChipClickListener(binding.btnEtc, R.color.primary_red, R.color.gray_300)
+		binding.etAge.doAfterTextChanged {
+			age = it.toString()
+		}
+
+		binding.btnNonDisabled.setOnClickListener {
+			setChipClickListener(binding.btnNonDisabled, R.color.primary_red, R.color.gray_300)
+			feature = "NONE"
+		}
+
+		binding.btnDisabled.setOnClickListener {
+			setChipClickListener(binding.btnDisabled, R.color.primary_red, R.color.gray_300)
+			feature = "DISABILITY"
+		}
+
+		binding.btnDementia.setOnClickListener {
+			setChipClickListener(binding.btnDementia, R.color.primary_red, R.color.gray_300)
+			feature = "DEMENTIA"
+		}
+
+		binding.btnRunaway.setOnClickListener {
+			setChipClickListener(binding.btnRunaway, R.color.primary_red, R.color.gray_300)
+			feature = "RUNAWAY"
+		}
+
+		binding.btnEtc.setOnClickListener {
+			setChipClickListener(binding.btnEtc, R.color.primary_red, R.color.gray_300)
+			feature = "OTHER"
+		}
 
 		binding.btnCancel.setOnClickListener {
+			dismiss()
+		}
+
+		binding.btnSearch.setOnClickListener {
+			val genderValue = gender.ifEmpty { null }
+			val ageValue = if (age.isNotEmpty()) age.toInt() else null
+			val featureValue = feature.ifEmpty { null }
+			val locationValue = location.ifEmpty { null }
+
+			viewModel.searchMissingPersonsFiltering(
+				SearchRequest(
+					gender = genderValue,
+					age = ageValue,
+					specialFeature = featureValue,
+					lastSeenLocation = locationValue
+				)
+			)
 			dismiss()
 		}
 	}
@@ -54,9 +107,11 @@ class SearchFilteringFragment : BottomSheetDialogFragment() {
 
 		if (currentStrokeColor == selectedColor) {
 			selectedChip.setChipStrokeColorResource(R.color.gray_300)
+			selectedChip.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray_700))
 			selectedChip.isChecked = false
 		} else {
 			selectedChip.setChipStrokeColorResource(R.color.primary_red)
+			selectedChip.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary_red))
 			selectedChip.isChecked = true
 		}
 

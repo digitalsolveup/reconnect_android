@@ -1,5 +1,7 @@
 package com.mobile.reconnect.data.network
 
+import android.content.Context
+import com.google.gson.GsonBuilder
 import java.net.CookieManager
 import okhttp3.JavaNetCookieJar
 import okhttp3.OkHttpClient
@@ -13,6 +15,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
